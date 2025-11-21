@@ -1,6 +1,7 @@
 import { Play, Plus, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useNavigate } from "react-router-dom";
 
 interface ContentCardProps {
   title: string;
@@ -10,6 +11,12 @@ interface ContentCardProps {
 }
 
 const ContentCard = ({ title, image, progress, className }: ContentCardProps) => {
+  const navigate = useNavigate();
+
+  const handlePlay = () => {
+    navigate(`/watch?title=${encodeURIComponent(title)}`);
+  };
+
   return (
     <div className={cn("group relative overflow-hidden rounded-lg", className)}>
       <div className="aspect-video relative overflow-hidden bg-muted">
@@ -31,7 +38,12 @@ const ContentCard = ({ title, image, progress, className }: ContentCardProps) =>
         
         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <div className="flex gap-2">
-            <Button size="icon" variant="default" className="rounded-full h-12 w-12 bg-foreground hover:bg-foreground/90 text-background">
+            <Button 
+              size="icon" 
+              variant="default" 
+              className="rounded-full h-12 w-12 bg-foreground hover:bg-foreground/90 text-background"
+              onClick={handlePlay}
+            >
               <Play className="h-5 w-5 fill-current" />
             </Button>
             <Button size="icon" variant="secondary" className="rounded-full h-10 w-10">
