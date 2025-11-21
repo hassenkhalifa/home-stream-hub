@@ -1,6 +1,7 @@
-import { Search, Bell, User } from "lucide-react";
+import { Search, Bell, User, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -8,13 +9,15 @@ const Header = () => {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-8">
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              StreamFlix
-            </h1>
+            <Link to="/">
+              <h1 className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                StreamFlix
+              </h1>
+            </Link>
             <nav className="hidden md:flex items-center gap-6">
-              <a href="#" className="text-foreground hover:text-primary transition-colors">
+              <Link to="/" className="text-foreground hover:text-primary transition-colors">
                 Accueil
-              </a>
+              </Link>
               <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
                 Séries
               </a>
@@ -35,6 +38,11 @@ const Header = () => {
                 className="pl-10 w-64 bg-secondary border-border"
               />
             </div>
+            <Link to="/downloads">
+              <Button size="icon" variant="ghost" className="text-foreground">
+                <Download className="h-5 w-5" />
+              </Button>
+            </Link>
             <Button size="icon" variant="ghost" className="text-foreground">
               <Bell className="h-5 w-5" />
             </Button>
