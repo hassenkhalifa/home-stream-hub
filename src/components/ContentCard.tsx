@@ -49,7 +49,12 @@ const ContentCard = ({ title, image, progress, className }: ContentCardProps) =>
             <Button size="icon" variant="secondary" className="rounded-full h-10 w-10">
               <Plus className="h-5 w-5" />
             </Button>
-            <Button size="icon" variant="secondary" className="rounded-full h-10 w-10">
+            <Button 
+              size="icon" 
+              variant="secondary" 
+              className="rounded-full h-10 w-10"
+              onClick={() => navigate(`/details?title=${encodeURIComponent(title)}`)}
+            >
               <Info className="h-5 w-5" />
             </Button>
           </div>
