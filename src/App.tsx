@@ -7,6 +7,9 @@ import Index from "./pages/Index";
 import Watch from "./pages/Watch";
 import Downloads from "./pages/Downloads";
 import ContentDetails from "./pages/ContentDetails";
+import Search from "./pages/Search";
+import Categories from "./pages/Categories";
+import MyList from "./pages/MyList";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,6 +25,9 @@ const App = () => (
           <Route path="/watch" element={<Watch />} />
           <Route path="/downloads" element={<Downloads />} />
           <Route path="/details" element={<ContentDetails />} />
+          <Route path="/search" element={<Search />} />
+          <Route path="/categories" element={<Categories />} />
+          <Route path="/my-list" element={<MyList />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

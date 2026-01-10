@@ -18,15 +18,15 @@ const Header = () => {
               <Link to="/" className="text-foreground hover:text-primary transition-colors">
                 Accueil
               </Link>
-              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-                Séries
-              </a>
-              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-                Films
-              </a>
-              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+              <Link to="/categories" className="text-muted-foreground hover:text-foreground transition-colors">
+                Catégories
+              </Link>
+              <Link to="/search" className="text-muted-foreground hover:text-foreground transition-colors">
+                Recherche
+              </Link>
+              <Link to="/my-list" className="text-muted-foreground hover:text-foreground transition-colors">
                 Ma Liste
-              </a>
+              </Link>
             </nav>
           </div>
           
