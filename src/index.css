@@ -2,100 +2,137 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Material Design 3 (Material You) Design System */
 
 @layer base {
   :root {
-    --background: 220 15% 8%;
-    --foreground: 0 0% 98%;
+    /* M3 Color Scheme - Dark Theme with Tonal Surfaces */
+    --background: 240 10% 6%;
+    --foreground: 240 10% 95%;
 
-    --card: 220 15% 12%;
-    --card-foreground: 0 0% 98%;
+    --surface: 240 10% 9%;
+    --surface-variant: 240 8% 14%;
+    --surface-container: 240 10% 11%;
+    --surface-container-high: 240 10% 15%;
+    --surface-container-highest: 240 10% 18%;
 
-    --popover: 220 15% 10%;
-    --popover-foreground: 0 0% 98%;
+    --card: 240 10% 11%;
+    --card-foreground: 240 10% 95%;
 
-    --primary: 5 85% 58%;
-    --primary-foreground: 0 0% 100%;
+    --popover: 240 10% 12%;
+    --popover-foreground: 240 10% 95%;
 
-    --secondary: 220 15% 18%;
-    --secondary-foreground: 0 0% 98%;
+    /* M3 Primary - Deep Purple */
+    --primary: 270 75% 65%;
+    --primary-foreground: 270 100% 10%;
+    --primary-container: 270 50% 25%;
+    --on-primary-container: 270 100% 90%;
 
-    --muted: 220 15% 15%;
-    --muted-foreground: 0 0% 65%;
+    /* M3 Secondary - Muted Teal */
+    --secondary: 180 35% 45%;
+    --secondary-foreground: 180 100% 95%;
+    --secondary-container: 180 30% 20%;
+    --on-secondary-container: 180 50% 85%;
 
-    --accent: 25 95% 53%;
-    --accent-foreground: 0 0% 100%;
+    /* M3 Tertiary - Soft Rose */
+    --tertiary: 340 55% 55%;
+    --tertiary-container: 340 40% 22%;
+    --on-tertiary-container: 340 80% 90%;
 
-    --destructive: 0 84.2% 60.2%;
+    --muted: 240 8% 16%;
+    --muted-foreground: 240 5% 55%;
+
+    --accent: 270 75% 65%;
+    --accent-foreground: 270 100% 10%;
+
+    --destructive: 0 65% 55%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 15% 20%;
-    --input: 220 15% 18%;
-    --ring: 5 85% 58%;
+    --border: 240 8% 18%;
+    --input: 240 10% 15%;
+    --ring: 270 75% 65%;
 
-    --radius: 0.75rem;
+    /* M3 Larger Radius for that rounded feel */
+    --radius: 1rem;
+    --radius-lg: 1.5rem;
+    --radius-xl: 2rem;
+    --radius-full: 9999px;
     
-    --gradient-hero: linear-gradient(135deg, hsl(5 85% 58% / 0.2), hsl(25 95% 53% / 0.1));
-    --gradient-card: linear-gradient(180deg, transparent, hsl(220 15% 8% / 0.8));
-    --shadow-card: 0 8px 32px hsl(220 15% 4% / 0.5);
-    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    /* M3 Elevation & Shadows with tonal colors */
+    --shadow-elevation-1: 0 1px 3px 1px hsl(0 0% 0% / 0.15), 0 1px 2px 0 hsl(0 0% 0% / 0.3);
+    --shadow-elevation-2: 0 2px 6px 2px hsl(0 0% 0% / 0.15), 0 1px 2px 0 hsl(0 0% 0% / 0.3);
+    --shadow-elevation-3: 0 4px 8px 3px hsl(0 0% 0% / 0.15), 0 1px 3px 0 hsl(0 0% 0% / 0.3);
 
-    --sidebar-background: 0 0% 98%;
+    /* M3 State layers */
+    --state-hover: 0.08;
+    --state-focus: 0.12;
+    --state-pressed: 0.12;
+    --state-dragged: 0.16;
 
-    --sidebar-foreground: 240 5.3% 26.1%;
+    --transition-standard: all 0.3s cubic-bezier(0.2, 0, 0, 1);
+    --transition-emphasized: all 0.5s cubic-bezier(0.2, 0, 0, 1);
 
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-background: 240 10% 9%;
+    --sidebar-foreground: 240 10% 95%;
+    --sidebar-primary: 270 75% 65%;
+    --sidebar-primary-foreground: 270 100% 10%;
+    --sidebar-accent: 240 10% 15%;
+    --sidebar-accent-foreground: 240 10% 95%;
+    --sidebar-border: 240 8% 18%;
+    --sidebar-ring: 270 75% 65%;
   }
 
   .dark {
-    --background: 220 15% 8%;
-    --foreground: 0 0% 98%;
+    --background: 240 10% 6%;
+    --foreground: 240 10% 95%;
 
-    --card: 220 15% 12%;
-    --card-foreground: 0 0% 98%;
+    --surface: 240 10% 9%;
+    --surface-variant: 240 8% 14%;
+    --surface-container: 240 10% 11%;
+    --surface-container-high: 240 10% 15%;
+    --surface-container-highest: 240 10% 18%;
 
-    --popover: 220 15% 10%;
-    --popover-foreground: 0 0% 98%;
+    --card: 240 10% 11%;
+    --card-foreground: 240 10% 95%;
 
-    --primary: 5 85% 58%;
-    --primary-foreground: 0 0% 100%;
+    --popover: 240 10% 12%;
+    --popover-foreground: 240 10% 95%;
 
-    --secondary: 220 15% 18%;
-    --secondary-foreground: 0 0% 98%;
+    --primary: 270 75% 65%;
+    --primary-foreground: 270 100% 10%;
+    --primary-container: 270 50% 25%;
+    --on-primary-container: 270 100% 90%;
 
-    --muted: 220 15% 15%;
-    --muted-foreground: 0 0% 65%;
+    --secondary: 180 35% 45%;
+    --secondary-foreground: 180 100% 95%;
+    --secondary-container: 180 30% 20%;
+    --on-secondary-container: 180 50% 85%;
 
-    --accent: 25 95% 53%;
-    --accent-foreground: 0 0% 100%;
+    --tertiary: 340 55% 55%;
+    --tertiary-container: 340 40% 22%;
+    --on-tertiary-container: 340 80% 90%;
 
-    --destructive: 0 62.8% 30.6%;
+    --muted: 240 8% 16%;
+    --muted-foreground: 240 5% 55%;
+
+    --accent: 270 75% 65%;
+    --accent-foreground: 270 100% 10%;
+
+    --destructive: 0 65% 55%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 15% 20%;
-    --input: 220 15% 18%;
-    --ring: 5 85% 58%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --border: 240 8% 18%;
+    --input: 240 10% 15%;
+    --ring: 270 75% 65%;
+
+    --sidebar-background: 240 10% 9%;
+    --sidebar-foreground: 240 10% 95%;
+    --sidebar-primary: 270 75% 65%;
+    --sidebar-primary-foreground: 270 100% 10%;
+    --sidebar-accent: 240 10% 15%;
+    --sidebar-accent-foreground: 240 10% 95%;
+    --sidebar-border: 240 8% 18%;
+    --sidebar-ring: 270 75% 65%;
   }
 }
 
@@ -105,6 +142,38 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+}
+
+/* M3 Custom Utilities */
+@layer utilities {
+  .surface-tint {
+    background-color: hsl(var(--surface));
+  }
+  
+  .surface-container {
+    background-color: hsl(var(--surface-container));
+  }
+  
+  .surface-container-high {
+    background-color: hsl(var(--surface-container-high));
+  }
+  
+  .surface-container-highest {
+    background-color: hsl(var(--surface-container-highest));
+  }
+
+  .elevation-1 {
+    box-shadow: var(--shadow-elevation-1);
+  }
+
+  .elevation-2 {
+    box-shadow: var(--shadow-elevation-2);
+  }
+
+  .elevation-3 {
+    box-shadow: var(--shadow-elevation-3);
   }
 }

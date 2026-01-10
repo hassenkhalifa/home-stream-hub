@@ -1,16 +1,8 @@
 import { useState } from "react";
-import { Search as SearchIcon, Filter, Star, Calendar, Film, X } from "lucide-react";
+import { Search as SearchIcon, SlidersHorizontal, Star, Calendar, Film, X, Check } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { Slider } from "@/components/ui/slider";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import {
   Sheet,
   SheetContent,
@@ -45,6 +37,37 @@ const allContent = [
 
 const genres = ["Tous", "Action", "Comédie", "Drame", "Sci-Fi", "Horreur", "Romance", "Thriller"];
 const years = ["Toutes", "2024", "2023", "2022", "2021", "2020"];
+
+// M3 Filter Chip Component
+const FilterChip = ({ 
+  label, 
+  selected, 
+  onToggle,
+  onRemove,
+  showRemove = false
+}: { 
+  label: string; 
+  selected?: boolean; 
+  onToggle?: () => void;
+  onRemove?: () => void;
+  showRemove?: boolean;
+}) => (
+  <button
+    onClick={showRemove ? onRemove : onToggle}
+    className={`
+      inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium
+      transition-all duration-200 ease-out
+      ${selected 
+        ? 'bg-secondary-container text-secondary-on-container border border-secondary/30' 
+        : 'bg-surface-container-high text-foreground border border-border hover:bg-surface-container-highest'
+      }
+    `}
+  >
+    {selected && <Check className="h-4 w-4" />}
+    {label}
+    {showRemove && <X className="h-3.5 w-3.5 hover:text-destructive" />}
+  </button>
+);
 
 const Search = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -89,35 +112,38 @@ const Search = () => {
       
       <main className="pt-24 pb-12">
         <div className="container mx-auto px-4">
-          {/* Search Header */}
+          {/* M3 Search Header */}
           <div className="mb-8">
-            <h1 className="text-3xl font-bold text-foreground mb-6">Rechercher</h1>
+            <h1 className="text-3xl font-medium text-foreground mb-6 tracking-tight">Rechercher</h1>
             
-            <div className="flex gap-4 flex-col md:flex-row">
-              {/* Search Input */}
+            <div className="flex gap-3 flex-col md:flex-row">
+              {/* M3 Search Bar */}
               <div className="flex-1 relative">
-                <SearchIcon className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                <Input
-                  placeholder="Rechercher un film, une série..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-12 h-12 text-lg bg-secondary border-border"
-                />
+                <div className="relative bg-surface-container-highest rounded-3xl overflow-hidden elevation-1 transition-all duration-300 focus-within:elevation-2">
+                  <SearchIcon className="absolute left-5 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                  <Input
+                    placeholder="Rechercher un film, une série..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="pl-14 pr-5 h-14 text-base bg-transparent border-0 focus-visible:ring-0 focus-visible:ring-offset-0 placeholder:text-muted-foreground"
+                  />
+                </div>
               </div>
               
-              {/* Filter Button - Mobile */}
+              {/* M3 Filter FAB - Mobile */}
               <Sheet>
                 <SheetTrigger asChild>
-                  <Button variant="outline" className="md:hidden h-12 gap-2">
-                    <Filter className="h-5 w-5" />
-                    Filtres
+                <Button 
+                    className="md:hidden h-14 w-14 rounded-2xl bg-primary-container text-primary-on-container hover:bg-primary-container/90 elevation-2"
+                  >
+                    <SlidersHorizontal className="h-6 w-6" />
                   </Button>
                 </SheetTrigger>
-                <SheetContent side="right" className="w-80">
+                <SheetContent side="right" className="w-80 bg-surface border-border">
                   <SheetHeader>
-                    <SheetTitle>Filtres</SheetTitle>
+                    <SheetTitle className="text-xl font-medium">Filtres</SheetTitle>
                   </SheetHeader>
-                  <div className="mt-6 space-y-6">
+                  <div className="mt-8 space-y-8">
                     <FilterControls
                       selectedGenre={selectedGenre}
                       setSelectedGenre={setSelectedGenre}
@@ -126,7 +152,10 @@ const Search = () => {
                       minRating={minRating}
                       setMinRating={setMinRating}
                     />
-                    <Button onClick={applyFilters} className="w-full">
+                    <Button 
+                      onClick={applyFilters} 
+                      className="w-full h-12 rounded-3xl bg-primary text-primary-foreground hover:bg-primary/90"
+                    >
                       Appliquer les filtres
                     </Button>
                   </div>
@@ -135,82 +164,99 @@ const Search = () => {
             </div>
           </div>
 
-          {/* Desktop Filters */}
-          <div className="hidden md:flex gap-4 mb-6 items-end">
-            <div className="space-y-2">
-              <label className="text-sm text-muted-foreground flex items-center gap-2">
-                <Film className="h-4 w-4" /> Genre
-              </label>
-              <Select value={selectedGenre} onValueChange={setSelectedGenre}>
-                <SelectTrigger className="w-40 bg-secondary">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  {genres.map(genre => (
-                    <SelectItem key={genre} value={genre}>{genre}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+          {/* M3 Desktop Filter Chips */}
+          <div className="hidden md:block mb-6">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <Film className="h-4 w-4" />
+                <span>Genre:</span>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {genres.map(genre => (
+                  <FilterChip
+                    key={genre}
+                    label={genre}
+                    selected={selectedGenre === genre}
+                    onToggle={() => {
+                      setSelectedGenre(genre);
+                      applyFilters();
+                    }}
+                  />
+                ))}
+              </div>
             </div>
             
-            <div className="space-y-2">
-              <label className="text-sm text-muted-foreground flex items-center gap-2">
-                <Calendar className="h-4 w-4" /> Année
-              </label>
-              <Select value={selectedYear} onValueChange={setSelectedYear}>
-                <SelectTrigger className="w-32 bg-secondary">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  {years.map(year => (
-                    <SelectItem key={year} value={year}>{year}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+            <div className="flex items-center gap-3 mb-4">
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <Calendar className="h-4 w-4" />
+                <span>Année:</span>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {years.map(year => (
+                  <FilterChip
+                    key={year}
+                    label={year}
+                    selected={selectedYear === year}
+                    onToggle={() => {
+                      setSelectedYear(year);
+                      applyFilters();
+                    }}
+                  />
+                ))}
+              </div>
             </div>
             
-            <div className="space-y-2 w-48">
-              <label className="text-sm text-muted-foreground flex items-center gap-2">
-                <Star className="h-4 w-4" /> Note minimum: {minRating[0]}
-              </label>
-              <Slider
-                value={minRating}
-                onValueChange={setMinRating}
-                max={5}
-                step={0.5}
-                className="py-2"
-              />
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <Star className="h-4 w-4" />
+                <span>Note min:</span>
+              </div>
+              <div className="flex items-center gap-3 bg-surface-container-high rounded-2xl px-4 py-3 w-64">
+                <Slider
+                  value={minRating}
+                  onValueChange={setMinRating}
+                  max={5}
+                  step={0.5}
+                  className="flex-1"
+                />
+                <span className="text-sm font-medium text-foreground min-w-[2rem]">{minRating[0]}</span>
+              </div>
+              <Button 
+                onClick={applyFilters} 
+                className="h-10 px-6 rounded-3xl bg-primary text-primary-foreground hover:bg-primary/90"
+              >
+                Appliquer
+              </Button>
             </div>
-            
-            <Button onClick={applyFilters} variant="secondary">
-              Appliquer
-            </Button>
           </div>
 
-          {/* Active Filters */}
+          {/* M3 Active Filter Chips */}
           {activeFilters.length > 0 && (
             <div className="flex flex-wrap gap-2 mb-6">
               {activeFilters.map(filter => (
-                <Badge key={filter} variant="secondary" className="gap-1 px-3 py-1">
-                  {filter}
-                  <X 
-                    className="h-3 w-3 cursor-pointer hover:text-primary" 
-                    onClick={() => clearFilter(filter)}
-                  />
-                </Badge>
+                <FilterChip
+                  key={filter}
+                  label={filter}
+                  selected
+                  showRemove
+                  onRemove={() => clearFilter(filter)}
+                />
               ))}
-              <Button variant="ghost" size="sm" onClick={clearAllFilters}>
+              <button 
+                onClick={clearAllFilters}
+                className="text-sm text-primary hover:text-primary/80 px-3 py-2 font-medium"
+              >
                 Effacer tout
-              </Button>
+              </button>
             </div>
           )}
 
           {/* Results Count */}
-          <p className="text-muted-foreground mb-6">
+          <p className="text-muted-foreground text-sm mb-6">
             {filteredContent.length} résultat{filteredContent.length !== 1 ? 's' : ''} trouvé{filteredContent.length !== 1 ? 's' : ''}
           </p>
 
-          {/* Results Grid */}
+          {/* M3 Results Grid */}
           {filteredContent.length > 0 ? (
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
               {filteredContent.map(content => (
@@ -222,10 +268,12 @@ const Search = () => {
               ))}
             </div>
           ) : (
-            <div className="text-center py-16">
-              <SearchIcon className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-foreground mb-2">Aucun résultat</h3>
-              <p className="text-muted-foreground">
+            <div className="text-center py-20">
+              <div className="w-20 h-20 rounded-full bg-surface-container-high flex items-center justify-center mx-auto mb-6">
+                <SearchIcon className="h-10 w-10 text-muted-foreground" />
+              </div>
+              <h3 className="text-xl font-medium text-foreground mb-2">Aucun résultat</h3>
+              <p className="text-muted-foreground text-sm max-w-sm mx-auto">
                 Essayez de modifier vos filtres ou votre recherche
               </p>
             </div>
@@ -252,42 +300,44 @@ const FilterControls = ({
   setMinRating: (v: number[]) => void;
 }) => (
   <>
-    <div className="space-y-2">
-      <label className="text-sm text-muted-foreground">Genre</label>
-      <Select value={selectedGenre} onValueChange={setSelectedGenre}>
-        <SelectTrigger className="w-full bg-secondary">
-          <SelectValue />
-        </SelectTrigger>
-        <SelectContent>
-          {genres.map(genre => (
-            <SelectItem key={genre} value={genre}>{genre}</SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
+    <div className="space-y-3">
+      <label className="text-sm font-medium text-foreground">Genre</label>
+      <div className="flex flex-wrap gap-2">
+        {genres.map(genre => (
+          <FilterChip
+            key={genre}
+            label={genre}
+            selected={selectedGenre === genre}
+            onToggle={() => setSelectedGenre(genre)}
+          />
+        ))}
+      </div>
     </div>
     
-    <div className="space-y-2">
-      <label className="text-sm text-muted-foreground">Année</label>
-      <Select value={selectedYear} onValueChange={setSelectedYear}>
-        <SelectTrigger className="w-full bg-secondary">
-          <SelectValue />
-        </SelectTrigger>
-        <SelectContent>
-          {years.map(year => (
-            <SelectItem key={year} value={year}>{year}</SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
+    <div className="space-y-3">
+      <label className="text-sm font-medium text-foreground">Année</label>
+      <div className="flex flex-wrap gap-2">
+        {years.map(year => (
+          <FilterChip
+            key={year}
+            label={year}
+            selected={selectedYear === year}
+            onToggle={() => setSelectedYear(year)}
+          />
+        ))}
+      </div>
     </div>
     
-    <div className="space-y-2">
-      <label className="text-sm text-muted-foreground">Note minimum: {minRating[0]}</label>
-      <Slider
-        value={minRating}
-        onValueChange={setMinRating}
-        max={5}
-        step={0.5}
-      />
+    <div className="space-y-3">
+      <label className="text-sm font-medium text-foreground">Note minimum: {minRating[0]}</label>
+      <div className="bg-surface-container-high rounded-2xl px-4 py-4">
+        <Slider
+          value={minRating}
+          onValueChange={setMinRating}
+          max={5}
+          step={0.5}
+        />
+      </div>
     </div>
   </>
 );

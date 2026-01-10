@@ -19,13 +19,29 @@ export default {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        surface: {
+          DEFAULT: "hsl(var(--surface))",
+          variant: "hsl(var(--surface-variant))",
+          container: "hsl(var(--surface-container))",
+          "container-high": "hsl(var(--surface-container-high))",
+          "container-highest": "hsl(var(--surface-container-highest))",
+        },
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
+          container: "hsl(var(--primary-container))",
+          "on-container": "hsl(var(--on-primary-container))",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",
+          container: "hsl(var(--secondary-container))",
+          "on-container": "hsl(var(--on-secondary-container))",
+        },
+        tertiary: {
+          DEFAULT: "hsl(var(--tertiary))",
+          container: "hsl(var(--tertiary-container))",
+          "on-container": "hsl(var(--on-tertiary-container))",
         },
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
@@ -59,6 +75,8 @@ export default {
         },
       },
       borderRadius: {
+        "3xl": "1.5rem",
+        "4xl": "2rem",
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
@@ -80,10 +98,21 @@ export default {
             height: "0",
           },
         },
+        "ripple": {
+          "0%": {
+            transform: "scale(0)",
+            opacity: "0.5",
+          },
+          "100%": {
+            transform: "scale(4)",
+            opacity: "0",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "ripple": "ripple 0.6s linear",
       },
     },
   },
