@@ -13,61 +13,71 @@ const categories = [
   {
     name: "Action",
     description: "Explosions, combats et adrénaline",
-    gradient: "from-red-600 to-orange-500",
+    color: "from-[hsl(0,70%,45%)] to-[hsl(25,80%,50%)]",
+    iconBg: "bg-[hsl(0,70%,35%)]",
     previews: [movieAction1, movieAction2, movieScifi1],
   },
   {
     name: "Comédie",
     description: "Rires et bonne humeur garantis",
-    gradient: "from-yellow-500 to-pink-500",
+    color: "from-[hsl(45,75%,50%)] to-[hsl(340,60%,55%)]",
+    iconBg: "bg-[hsl(45,75%,40%)]",
     previews: [movieComedy1, movieDrama1, movieAction1],
   },
   {
     name: "Drame",
     description: "Émotions intenses et histoires profondes",
-    gradient: "from-purple-600 to-blue-600",
+    color: "from-[hsl(270,50%,45%)] to-[hsl(220,60%,45%)]",
+    iconBg: "bg-[hsl(270,50%,35%)]",
     previews: [movieDrama1, movieScifi2, movieComedy1],
   },
   {
     name: "Science-Fiction",
     description: "Voyages spatiaux et futurs possibles",
-    gradient: "from-cyan-500 to-blue-700",
+    color: "from-[hsl(190,60%,45%)] to-[hsl(220,70%,40%)]",
+    iconBg: "bg-[hsl(190,60%,35%)]",
     previews: [movieScifi1, movieScifi2, movieAction2],
   },
   {
     name: "Horreur",
     description: "Frissons et suspense terrifiant",
-    gradient: "from-gray-800 to-red-900",
+    color: "from-[hsl(240,10%,25%)] to-[hsl(0,50%,30%)]",
+    iconBg: "bg-[hsl(0,50%,25%)]",
     previews: [movieDrama1, movieAction2, movieScifi1],
   },
   {
     name: "Romance",
     description: "Histoires d'amour touchantes",
-    gradient: "from-pink-500 to-rose-600",
+    color: "from-[hsl(340,55%,50%)] to-[hsl(350,60%,45%)]",
+    iconBg: "bg-[hsl(340,55%,40%)]",
     previews: [movieComedy1, movieDrama1, movieScifi2],
   },
   {
     name: "Thriller",
     description: "Suspense et tension psychologique",
-    gradient: "from-slate-700 to-zinc-900",
+    color: "from-[hsl(220,15%,30%)] to-[hsl(240,10%,20%)]",
+    iconBg: "bg-[hsl(220,15%,25%)]",
     previews: [movieAction1, movieDrama1, movieScifi1],
   },
   {
     name: "Animation",
     description: "Pour petits et grands enfants",
-    gradient: "from-green-400 to-emerald-600",
+    color: "from-[hsl(150,50%,45%)] to-[hsl(160,55%,40%)]",
+    iconBg: "bg-[hsl(150,50%,35%)]",
     previews: [movieComedy1, movieScifi2, movieAction1],
   },
   {
     name: "Documentaire",
     description: "Découvertes et histoires vraies",
-    gradient: "from-amber-600 to-yellow-700",
+    color: "from-[hsl(35,60%,45%)] to-[hsl(45,70%,40%)]",
+    iconBg: "bg-[hsl(35,60%,35%)]",
     previews: [movieDrama1, movieScifi1, movieAction2],
   },
   {
     name: "Fantastique",
     description: "Magie, créatures et mondes imaginaires",
-    gradient: "from-violet-600 to-purple-800",
+    color: "from-[hsl(280,55%,50%)] to-[hsl(290,50%,40%)]",
+    iconBg: "bg-[hsl(280,55%,40%)]",
     previews: [movieScifi2, movieAction1, movieComedy1],
   },
 ];
@@ -79,25 +89,25 @@ const Categories = () => {
       
       <main className="pt-24 pb-12">
         <div className="container mx-auto px-4">
-          <h1 className="text-3xl font-bold text-foreground mb-2">Catégories</h1>
-          <p className="text-muted-foreground mb-8">Explorez notre catalogue par genre</p>
+          <h1 className="text-3xl font-medium text-foreground mb-2 tracking-tight">Catégories</h1>
+          <p className="text-muted-foreground text-sm mb-8">Explorez notre catalogue par genre</p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {categories.map((category) => (
               <Link
                 key={category.name}
                 to={`/search?genre=${encodeURIComponent(category.name)}`}
-                className="group relative overflow-hidden rounded-xl aspect-[16/9] cursor-pointer"
+                className="group relative overflow-hidden rounded-3xl aspect-[16/10] cursor-pointer elevation-1 hover:elevation-3 transition-all duration-300"
               >
-                {/* Background Gradient */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${category.gradient} opacity-90`} />
+                {/* M3 Tonal Background with Gradient */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${category.color}`} />
                 
-                {/* Preview Images */}
-                <div className="absolute inset-0 flex">
+                {/* Preview Images - Subtle overlay */}
+                <div className="absolute inset-0 flex opacity-20">
                   {category.previews.map((preview, index) => (
                     <div
                       key={index}
-                      className="flex-1 opacity-30 group-hover:opacity-50 transition-opacity duration-300"
+                      className="flex-1 group-hover:opacity-70 transition-opacity duration-500"
                       style={{
                         backgroundImage: `url(${preview})`,
                         backgroundSize: 'cover',
@@ -107,26 +117,29 @@ const Categories = () => {
                   ))}
                 </div>
                 
-                {/* Overlay Gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+                {/* Bottom Gradient for text readability */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
                 
-                {/* Content */}
+                {/* M3 Content */}
                 <div className="absolute inset-0 p-6 flex flex-col justify-end">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <h3 className="text-2xl font-bold text-white mb-1 group-hover:text-primary transition-colors">
+                  <div className="flex items-end justify-between">
+                    <div className="flex-1">
+                      <h3 className="text-2xl font-medium text-white mb-1 tracking-tight group-hover:text-primary transition-colors duration-300">
                         {category.name}
                       </h3>
-                      <p className="text-white/80 text-sm">
+                      <p className="text-white/75 text-sm">
                         {category.description}
                       </p>
                     </div>
-                    <ChevronRight className="h-6 w-6 text-white group-hover:translate-x-1 transition-transform" />
+                    {/* M3 Icon Button */}
+                    <div className="w-12 h-12 rounded-2xl bg-white/15 backdrop-blur-sm flex items-center justify-center group-hover:bg-primary group-hover:scale-105 transition-all duration-300">
+                      <ChevronRight className="h-6 w-6 text-white group-hover:translate-x-0.5 transition-transform" />
+                    </div>
                   </div>
                 </div>
                 
-                {/* Hover Effect */}
-                <div className="absolute inset-0 border-2 border-transparent group-hover:border-primary/50 rounded-xl transition-colors" />
+                {/* M3 State Layer on hover */}
+                <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/10 transition-colors duration-300 rounded-3xl" />
               </Link>
             ))}
           </div>
