@@ -150,45 +150,38 @@
 /* Custom Scrollbar Styling */
 * {
   scrollbar-width: thin;
-  scrollbar-color: hsl(var(--primary) / 0.5) hsl(var(--surface-container));
+  scrollbar-color: hsl(var(--primary) / 0.5) transparent;
 }
 
 /* Webkit Scrollbar (Chrome, Safari, Edge) */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: hsl(var(--surface-container));
-  border-radius: var(--radius);
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(
-    180deg,
-    hsl(var(--primary) / 0.6) 0%,
-    hsl(var(--primary) / 0.4) 100%
-  );
-  border-radius: var(--radius);
-  border: 2px solid hsl(var(--surface-container));
-  transition: background 0.2s ease;
+  background: hsl(var(--primary) / 0.5);
+  border-radius: var(--radius-full);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(
-    180deg,
-    hsl(var(--primary) / 0.8) 0%,
-    hsl(var(--primary) / 0.6) 100%
-  );
+  background: hsl(var(--primary) / 0.7);
 }
 
 ::-webkit-scrollbar-thumb:active {
   background: hsl(var(--primary) / 0.9);
 }
 
+::-webkit-scrollbar-button {
+  display: none;
+}
+
 ::-webkit-scrollbar-corner {
-  background: hsl(var(--surface-container));
+  background: transparent;
 }
 
 /* Hide scrollbar but keep functionality */
